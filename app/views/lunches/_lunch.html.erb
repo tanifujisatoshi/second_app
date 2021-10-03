@@ -1,0 +1,8 @@
+<div class="card">
+  <%= link_to image_tag( lunch.image , class: :card__img ), lunch_path(lunch.id) %>
+<%# lunchesコントローラーのshowアクションに遷移するためにはレコードのidが必要であるため引数に入れている %>
+  <div class="card__body">
+    <%= link_to lunch.main_dish, lunch_path(lunch.id),  class: :card__title %>
+    <%= link_to lunch.user.name, user_path(lunch.user.id), class: :card__title %>
+  </div>
+</div>

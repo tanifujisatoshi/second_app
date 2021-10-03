@@ -1,0 +1,42 @@
+<%= form_with model: @lunch, local: true do |f|%>
+<%# 新規投稿をする場合はこのインスタンス変数の中身は空のなので入力した内容はcreateアクションになる %>
+<%# 編集をする場合はそのインスタンス変数の中身にはレコード情報が入っているので入力した内容はupdateアクションになる %>
+  <div class="field">
+    <%= f.label :staple_food, "主食" %><br />
+    <%= f.text_field :staple_food, id:"prototype_title" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :main_dish, "主菜" %><br />
+    <%= f.text_field :main_dish, class: :form__text, id:"prototype_catch_copy" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :side_dish, "副菜" %><br />
+    <%= f.text_field :side_dish, class: :form__text, id:"prototype_concept" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :soup, "汁物" %><br />
+    <%= f.text_field :soup, id:"prototype_title" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :drink, "飲み物" %><br />
+    <%= f.text_field :drink, class: :form__text, id:"prototype_catch_copy" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :other, "その他" %><br />
+    <%= f.text_field :other, class: :form__text, id:"prototype_concept" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image, "おすすめの画像" %><br />
+    <%= f.file_field :image, id:"prototype_image" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "保存する", class: :form__btn  %>
+  </div>
+<% end %>

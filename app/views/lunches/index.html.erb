@@ -1,0 +1,17 @@
+<main class="main">
+  <div class="inner">
+    <% if user_signed_in? %>
+      <div class="greeting">
+        こんにちは、
+        <%= link_to "#{current_user.name}さん", user_path(current_user.id), class: :greeting__link %>
+      </div> 
+    <% end %>
+    <div class="card__wrapper">
+      <%= render partial: "lunches/lunch", collection: @lunches %>
+<%# lunchesフォルダの_lunch.html.erbというテンプレートファイルを呼び出している %>
+<%# lunchesコントローラーのindexアクションでlunchテーブルのレコードを取得して@lunchesというインスタンス変数に代入した %>
+<%# そのレコードの数だけ_lunch.html.erbの内容がそれぞれ表示される %>
+<%# それぞれのレコード情報が入った変数lunchが_lunch.html.erbで使用することができる %>
+    </div>
+  </div>
+</main>

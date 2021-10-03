@@ -1,0 +1,87 @@
+<main class="main">
+  <div class="inner">
+    <div class="prototype__wrapper">
+      <p class="prototype__hedding">
+        <%= @lunch.main_dish %>
+      </p>
+      <%= link_to @lunch.user.name, user_path(@lunch.user.id), class: :prototype__user %>
+       <% if user_signed_in? && current_user.id == @lunch.user_id %>
+        <div class="prototype__manage">
+          <%= link_to "編集する",  edit_lunch_path(@lunch.id), class: :prototype__btn %>
+          <%= link_to "削除する", lunch_path, method: :delete, class: :prototype__btn %>
+        </div>
+       <% end %>
+      <div class="prototype__image">
+        <%= image_tag @lunch.image %>
+      </div>
+      <div class="prototype__body">
+        <div class="prototype__detail">
+          <p class="detail__title">主食</p>
+          <p class="detail__message">
+            <%= @lunch.staple_food %>
+          </p>
+        </div>
+
+        <div class="prototype__detail">
+          <p class="detail__title">主菜</p>
+          <p class="detail__message">
+            <%= @lunch.main_dish %>
+          </p>
+        </div>
+
+        <div class="prototype__detail">
+          <p class="detail__title">副菜</p>
+          <p class="detail__message">
+            <%= @lunch.side_dish %>
+          </p>
+        </div>
+
+        <div class="prototype__detail">
+          <p class="detail__title">汁物</p>
+          <p class="detail__message">
+            <%= @lunch.soup %>
+          </p>
+        </div>
+
+        <div class="prototype__detail">
+          <p class="detail__title">飲み物</p>
+          <p class="detail__message">
+            <%= @lunch.drink %>
+          </p>
+        </div>
+
+        <div class="prototype__detail">
+          <p class="detail__title">その他</p>
+          <p class="detail__message">
+            <%= @lunch.other %>
+          </p>
+        </div>
+
+      </div>
+      <div class="prototype__comments">
+        <% if user_signed_in? %>
+<%# ログインしていればコメントを投稿することができる %>
+          <%= form_with model: [@lunch, @comment], local: true do |f|%>
+<%# @commentの中身は空である @lunchにはレコード情報が入っている %>
+<%# それらの情報からコメントフォームに入力した情報はcommentsコントローラーのcreateアクション(給食に対してコメントを残す)に勝手に送信してくれる %>
+            <div class="field">
+              <%= f.label :comment, "コメント" %><br />
+             <%= f.text_field :text, id:"comment_text" %>
+            </div>
+            <div class="actions">
+               <%= f.submit "送信する", class: :form__btn  %>
+            </div>
+          <% end %>
+        <% end %> 
+        <ul class="comments_lists">
+          <% @comments.each do |comment| %>
+            <li class="comments_list">
+              <%= comment.text %>
+              <%= link_to comment.user.name, user_path(comment.user.id), class: :comment_user %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
